@@ -8,6 +8,8 @@ public class AddressBookApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AddressBookApplication.class, args);
+		System.out.println("Testing psvm");
+		// create string
 	}
 
 }
