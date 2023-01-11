@@ -7,9 +7,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AddressBookApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AddressBookApplication.class, args);
+		SpringApplication app = new SpringApplication(AddressBookApplication.class);
+		System.out.println("running app");
+		
+		// print out args with --dataDir=/opt/tmp/data
 		System.out.println("Testing psvm");
-		// create string
+		for (String s : args) {
+			System.out.println("Java Args: " + s);
+		}
+		app.run(args);
+
 	}
 
 }
