@@ -1,10 +1,10 @@
 package com.day13_Workshop.addressBook;
 
-import java.io.File;
-
 import org.springframework.boot.DefaultApplicationArguments;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import static com.day13_Workshop.addressBook.util.IOUtils.*;
 
 // main file for initialisating Spring Boot App
 @SpringBootApplication
@@ -20,12 +20,10 @@ public class AddressBookApplication {
 
 		// if value is not null, create directory and exit
 		if (null != pathName) { // put null first to prevent null point exception
-			System.out.println("Found: --dataDir"); // REMOVE
-			System.out.println("pathName: " + pathName); // REMOVE
-			// create path object
-			File dir = new File(pathName);
-			// create folder with path
-			dir.mkdirs();
+			// System.out.println("Found: --dataDir"); // REMOVE
+			// System.out.println("pathName: " + pathName); // REMOVE
+			createDirectory(pathName);
+			
 		} else { // else exit
 			System.exit(1);
 		}

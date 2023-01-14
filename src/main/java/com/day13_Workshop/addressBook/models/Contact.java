@@ -2,6 +2,8 @@ package com.day13_Workshop.addressBook.models;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.Random;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -40,9 +42,28 @@ public class Contact implements Serializable{
     
     private String id;
 
+    // Constructor#0 (For initialising empty contact)
+    public Contact() {
+        this.id = generateId(8);
+    }
 
-    // methods for class
-    
+    // Constructor #1 (generating from form)
+    public Contact(String name, String email, String phone, LocalDate birthDate) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.birthDate = birthDate;
+        // add method call to calculate and set age
+
+    }
+    // Constructor #2 (generating from existing file in data)
+    public Contact(String id, String name, String email, String phone, LocalDate birthDate) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.birthDate = birthDate;        
+    }
     
     // getters and setters
     public String getName() {
@@ -69,8 +90,20 @@ public class Contact implements Serializable{
     public LocalDate getBirthDate() {
         return birthDate;
     }
+    // set dob, calculate age, call set age
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
+        // calculating age based on today's value
+        Integer ageYears = 0;
+        LocalDate today = LocalDate.now();
+        Period agePeriod = Period.between(birthDate, today);
+        // get year from dob
+        if (birthDate != null) {
+            ageYears = agePeriod.getYears();
+        }
+        // get year from today
+        System.out.println("calculatedAge");
+        this.age = ageYears;
     }
 
     public Integer getAge() {
@@ -86,6 +119,18 @@ public class Contact implements Serializable{
     public void setId(String id) {
         this.id = id;
     }
-    
+    // method to generate random id
+    public synchronized String generateId(int numChars) {
+        String newId = "";
+        Random rand = new Random();
+        
+        // while String less than length numChars continue adding
+        while (newId.length() < numChars) {
+            String num = Integer.toHexString(rand.nextInt());
+            newId = newId.concat(num);
+        }
+        // slice characters
+        return newId.substring(0,numChars);
+    }
 
 }
