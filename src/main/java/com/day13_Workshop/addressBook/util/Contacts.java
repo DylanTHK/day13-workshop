@@ -39,7 +39,17 @@ public class Contacts {
 
     // method to create and retrieve contact form file
     // parameters: file directory, desired id
-    public void getContact() {
+    public Contact getContact() {
+        // set random new contact
+        Contact contact = new Contact();
 
+        // read data folder
+
+        // search for specific contact
+
+        // read each line and add information to contact object
+
+        // return contact object 
+        return contact;
     }
 }

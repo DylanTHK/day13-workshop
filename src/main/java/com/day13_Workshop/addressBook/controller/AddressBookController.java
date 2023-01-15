@@ -7,6 +7,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -51,18 +52,28 @@ public class AddressBookController {
 
         model.addAttribute("validContact", contact);
 
-        System.out.println("Valid contact received: " + contact);
-        System.out.println("Application Arguments: " + path);
+        // System.out.println("Valid contact received: " + contact);
+        // System.out.println("Application Arguments: " + path);
 
         // call helper class to save contact details
         contactsHelper.saveContact(contact, path);
 
         // send created HTTP code HOW TO DO??
+        System.out.println();
         return "displayContact";
     }
 
 
     // GET /contact/{id} request handler
+    @GetMapping(path="/contact/{id}")
+    public String getContact(Model model, @PathVariable String id) {
+        System.out.println("Received ID: " + id);
+        // call method to retrieve contact object (with data)
+        Contact contact = contactsHelper.getContact();
 
+        // add contact object to model
 
+        // change this to displayContacts (after testing)
+        return "contactLinks";
+    }
 }
