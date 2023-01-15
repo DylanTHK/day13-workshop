@@ -13,16 +13,14 @@ import com.day13_Workshop.addressBook.models.Contact;
 // helper class for saving and retrieving contact information
 @Component
 public class Contacts {
-    // require model, path
+    // method to save contact as file
     public void saveContact(Contact contact, String path) { 
         System.out.println("Inside Contacts"); // REMOVE
 
         // file name (object id)
         String fileName = contact.getId();
-        
         // // create folder path
         File dirPath = new File(path);
-
         // create path for file
         File filePath = new File(dirPath, fileName);
         
@@ -37,6 +35,11 @@ public class Contacts {
         } catch(IOException e) {
             e.getMessage();
         }
+    }
+
+    // method to create and retrieve contact form file
+    // parameters: file directory, desired id
+    public void getContact() {
 
     }
 }
