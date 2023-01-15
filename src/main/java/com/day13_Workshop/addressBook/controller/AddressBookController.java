@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.day13_Workshop.addressBook.models.Contact;
 import com.day13_Workshop.addressBook.util.Contacts;
 
+import jakarta.validation.Valid;
+
 
 @Controller
 @RequestMapping
@@ -42,8 +44,24 @@ public class AddressBookController {
 
     // method to receive contact for validation and 
     @PostMapping(path="/contact")
-    public String saveContact() {
+    // @Valid Contact contact, 
+    public String saveContact(Model model, @Valid Contact contact) {
+
+        String path = appArgs.getOptionValues("dataDir").get(0);
+
+        model.addAttribute("validContact", contact);
+
+        System.out.println("Valid contact received: " + contact);
+        System.out.println("Application Arguments: " + path);
+
+        // call helper class to save contact details
+        contactsHelper.saveContact(contact, path);
 
         return "displayContact";
     }
+
+
+    // GET /contact/{id} request handler
+
+
 }
