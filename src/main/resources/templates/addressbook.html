@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .error {
+          color: red;
+        }
+      </style>
     <title>Address Book Page</title>
 </head>
 <body>
@@ -18,6 +23,7 @@
         <p>
             Name:
             <input type="text" name="name" data-th-field="*{name}">
+            <br>
             <span class="error"
                 data-th-if="${#fields.hasErrors('name')}"
                 data-th-errors="*{name}">
@@ -28,6 +34,7 @@
         <p>
             Email:
             <input type="text" name="email" data-th-field="*{email}">
+            <br>
             <span class="error"
                 data-th-if="${#fields.hasErrors('email')}"
                 data-th-errors="*{email}">
@@ -38,6 +45,7 @@
         <p>
             Phone Number:
             <input type="text" name="phone" data-th-field="*{phone}">
+            <br>
             <span class="error"
                 data-th-if="${#fields.hasErrors('phone')}"
                 data-th-errors="*{phone}">
@@ -47,11 +55,13 @@
 
         <p>
             Date of Birth:
-            <input type="date" name="dob" data-th-field="*{birthDate}">
+            <input type="date" data-th-field="*{birthDate}">
+            <br>
             <span class="error"
                 data-th-if="${#fields.hasErrors('birthDate')}"
                 data-th-errors="*{birthDate}">
             </span>
+            <br>
             <span class="error"
                 data-th-if="${#fields.hasErrors('age')}"
                 data-th-errors="*{age}">

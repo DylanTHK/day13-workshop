@@ -12,6 +12,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.boot.ApplicationArguments;
@@ -26,8 +27,6 @@ import com.day13_Workshop.addressBook.models.Contact;
 public class Contacts {
     // method to save contact as file
     public void saveContact(Contact contact, String path) { 
-        System.out.println("Inside Contacts"); // REMOVE
-
         // file name (object id)
         String fileName = contact.getId();
         // // create folder path
@@ -79,5 +78,21 @@ public class Contacts {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void getAllLinks(String path, Model model) {
+        // read data folder
+        File folder = new File(path);
+
+        // get list of files
+        File[] listOfFiles = folder.listFiles();
+        List<String> fileList = new ArrayList<String>();
+
+        for (File file : listOfFiles) {
+            fileList.add(file.getName());
+        }
+
+        System.out.println(fileList);
+        model.addAttribute("listOfFiles", fileList);
     }
 }

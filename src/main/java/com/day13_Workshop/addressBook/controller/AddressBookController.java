@@ -81,4 +81,14 @@ public class AddressBookController {
         // change this to displayContacts (after testing)
         return "displayContact";
     }
+
+    // Task 5
+    @GetMapping(path="/displayAll")
+    public String allContacts(Model model) {
+        String path = appArgs.getOptionValues("dataDir").get(0);
+        contactsHelper.getAllLinks(path, model);
+        // call method to display Contact Links (/contact/{id}, GET request)
+
+        return "displayAllContacts";
+    }
 }

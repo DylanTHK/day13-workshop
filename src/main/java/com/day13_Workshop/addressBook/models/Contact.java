@@ -31,8 +31,8 @@ public class Contact implements Serializable{
     @Min(value=7, message="Phone number must contain at least 7 digits")
     private String phone;
 
-    @NotNull(message="Must input date")
     @Past(message="Invalid date, must be in the past")
+    @NotNull(message="Must input date")
     @DateTimeFormat(pattern="dd-MM-yyyy")
     private LocalDate birthDate;
 
@@ -101,8 +101,7 @@ public class Contact implements Serializable{
         if (birthDate != null) {
             ageYears = agePeriod.getYears();
         }
-        // get year from today
-        System.out.println("calculatedAge");
+        // get year from today        
         this.age = ageYears;
     }
 
