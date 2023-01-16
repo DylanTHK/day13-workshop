@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,11 +29,11 @@ public class AddressBookController {
     @Autowired
     ApplicationArguments appArgs;
 
-
     // contact 
     @GetMapping(path="/addressbook")
     public String getForm(Model model) {
         Contact newContact = new Contact();
+
         newContact.setBirthDate(LocalDate.of(1992, 01, 28));
         System.out.println("newContact ID: " + newContact.getId());
         System.out.println("birthDate: " + newContact.getBirthDate());
@@ -46,8 +47,11 @@ public class AddressBookController {
     // method to receive contact for validation and 
     @PostMapping(path="/contact")
     // @Valid Contact contact, 
-    public String saveContact(Model model, @Valid Contact contact) {
+    public String saveContact(@Valid Contact contact, BindingResult result, Model model) {
 
+        if (result.hasErrors()) {
+            return "addressBook";
+        }
         String path = appArgs.getOptionValues("dataDir").get(0);
 
         model.addAttribute("validContact", contact);
@@ -67,13 +71,14 @@ public class AddressBookController {
     // GET /contact/{id} request handler
     @GetMapping(path="/contact/{id}")
     public String getContact(Model model, @PathVariable String id) {
+        
         System.out.println("Received ID: " + id);
-        // call method to retrieve contact object (with data)
-        Contact contact = contactsHelper.getContact();
+        String dir = appArgs.getOptionValues("dataDir").get(0);
 
-        // add contact object to model
+        // call method to retrieve contact object (with data)
+        contactsHelper.getContactById(model, id, dir);
 
         // change this to displayContacts (after testing)
-        return "contactLinks";
+        return "displayContact";
     }
 }
